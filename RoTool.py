@@ -113,6 +113,8 @@ while True:
         print("")
         print("default badge IDs you can use:")
         print("")
+        print("2124510987 - Flex your account age welcome badge - good for spotting PGed accounts")
+        print("")
         print("123092900 - Kohls admin house [NBC] visitor 2013")
         print("140970516 - Kohls admin house [NBC] visitor 2014")
         print("123009394 - Kohls admin house [NBC] easter egg")
