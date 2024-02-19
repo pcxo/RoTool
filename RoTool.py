@@ -62,6 +62,8 @@ def start():
     print("@ycxo on discord")
     print("guns.lol/cxo")
     print("(thanks to @decryptionite for help)")
+    print("3cxos on roblox")
+    print("Dekryptionite on roblox")
     print("___________________________________")
 
 start()
