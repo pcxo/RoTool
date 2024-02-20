@@ -10,6 +10,8 @@ GAMEPASS_ENDPOINT = "https://inventory.roblox.com/v1/users/{}/items/GamePass/{}"
 BADGE_ENDPOINT = "https://inventory.roblox.com/v1/users/{}/items/2/{}/is-owned"
 INVENTORY_ENDPOINT = "https://inventory.roblox.com/v1/users/{}/can-view-inventory"
 DETAILEDPLR_ENDPOINT = "https://users.roblox.com/v1/users/{}"
+CATALOGGEAR_ENDPOINT = "https://catalog.roblox.com/v1/search/items?category=Accessories&includeNotForSale=true&limit=10&salesTypeFilter=1&subcategory=Gear&Keyword={}"
+CATALOG_ENDPOINT = "https://catalog.roblox.com/v1/search/items?category={}&keyword={}&limit=10&salesTypeFilter=1"
 
 def Data(hi):
 
@@ -50,6 +52,48 @@ def checkbadge(useid, badid):
     print(f'badge owned: {info}')
     return info
 
+def inv(yo):
+
+    responseyo= requests.get(INVENTORY_ENDPOINT.format(yo))
+
+    inventory = responseyo.json()
+
+    print(f'Data retreieved!\n\n   {inventory}')
+    return inventory
+
+def plr(roadblox):
+
+    responseData = requests.get(DETAILEDPLR_ENDPOINT.format(roadblox))
+
+    datab = responseData.json()["description"]
+    databc = responseData.json()["created"]
+    databcd = responseData.json()["isBanned"]
+    databcde = responseData.json()["hasVerifiedBadge"]
+    databcdef = responseData.json()["id"]
+    databcdefg = responseData.json()["name"]
+    databcdefgh = responseData.json()["displayName"]
+
+    print(f'Data retreieved!\n\n   description: {datab}\n\n   creation date: {databc}\n   isBanned: {databcd}\n \n   verified: {databcde}\n   ID: {databcdef}\n   name: {databcdefg}\n   display: {databcdefgh}')
+    return datab
+
+def catalog(gear):
+
+    responseData = requests.get(CATALOGGEAR_ENDPOINT.format(gear))
+
+    data = responseData.json()["data"][0]["id"]
+
+    print(f'Gears retreieved!\n\n   gear ID: {data}')
+    return data
+
+def catalog10(gears):
+
+    responseData = requests.get(CATALOGGEAR_ENDPOINT.format(gears))
+
+    data = responseData.json()["data"]
+
+    print(f'\n   {data}')
+    return data
+
 def start():
     os.system("cls")
     print(
@@ -59,11 +103,9 @@ def start():
         "██   ██ ██    ██ ██   ██ ██      ██    ██  ██ ██\n"
         "██   ██  ██████  ██████  ███████  ██████  ██   ██\n"
     )
-    print("@ycxo on discord")
-    print("guns.lol/cxo")
-    print("(thanks to @decryptionite for help)")
-    print("3cxos on roblox")
-    print("Dekryptionite on roblox")
+    print("@ycxo on discord                                  | ROBLOX users:")
+    print("guns.lol/cxo                                      | 3cxos - creator")
+    print("(thanks to @decryptionite for help)               | Dekryptionite - helper")
     print("___________________________________")
 
 start()
@@ -72,8 +114,11 @@ while True:
 
     print("")
     print("1 - get user info                                 |requires player ID. (scrape their info using option 1 first)")
-    print("2 - gamepass checker         <--------------------|")
-    print("3 - badge checker            <--------------------|")
+    print("2 - gamepass checker  <---------------------------|")
+    print("3 - badge checker  <------------------------------|")
+    print("4 - check if users inventory can be viewed  <-----|")
+    print("5 - detailed account info on a player  <----------|")
+    print("6 - gear ID scraper                               |")
     print("")
 
 
@@ -142,3 +187,32 @@ while True:
             print("")
             tostart = input("press [ENTER] to return to the start menu. ")
             start()
+
+    elif inputs == "5":
+            hate = input("player ID: ")
+            print("")
+            plr(hate)
+            time.sleep(1)
+            print("")
+            tostart = input("press [ENTER] to return to the start menu. ")
+            start()
+
+    elif inputs == "6":
+            forsure = input("Gear name: ")
+            print("")
+            catalog(forsure)
+            time.sleep(1)
+            print("")
+            ask = input("Would you like to scrape 9 other gear IDs of the same query? Y/N: ")
+            if ask.lower() == "y" or ask.upper() == "Y":
+                catalog10(forsure)
+                print("")
+                time.sleep(1)
+                tostart = input("press [ENTER] to return to the start menu. ")
+                start()
+
+            elif ask.lower() == "n" or ask.upper() == "N":
+                    print("")
+                    time.sleep(1)
+                    tostart = input("press [ENTER] to return to the start menu. ")
+                    start()
